@@ -1,0 +1,108 @@
+/* Contenedor principal */
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: #f4f4f4;
+  min-height: 100vh;
+}
+
+/* Header */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.admin-header h2 {
+  margin: 0;
+}
+
+.user-login-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-login-section span {
+  font-size: 1rem;
+}
+
+.logout-button {
+  background-color: #ff4d4d;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #d43f3f;
+}
+
+/* Barra de navegación */
+.admin-nav {
+  width: 100%;
+  background-color: #007bff;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.admin-nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.admin-nav li {
+  font-size: 1rem;
+}
+
+.admin-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.admin-nav a:hover {
+  color: #ffdd57;
+}
+
+/* Información del usuario */
+.user-info {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.user-info p {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* Contenido principal */
+.admin-content {
+  width: 100%;
+  max-width: 1700px;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

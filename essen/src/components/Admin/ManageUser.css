@@ -1,0 +1,128 @@
+/* Contenedor principal */
+.users-section {
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 1800px;
+    margin: 0 auto;
+  }
+  
+  /* Título */
+  .users-section h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #333;
+    text-align: center;
+  }
+  
+  .users-section h2 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #555;
+    text-align: center;
+  }
+  
+  /* Formulario */
+  .users-section input,
+  .users-section select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .users-section button {
+    padding: 0.75rem 1.5rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .users-section button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Tabla */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+  }
+  
+  thead {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+    text-align: center;
+  }
+  
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  th {
+    font-weight: bold;
+  }
+  
+  td input,
+  td select {
+    width: 90%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  td input[disabled],
+  td select[disabled] {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+  }
+  
+  /* Botones */
+  button {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button.bg-blue-500 {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  button.bg-blue-500:hover {
+    background-color: #0056b3;
+  }
+  
+  button.bg-green-500 {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  button.bg-green-500:hover {
+    background-color: #218838;
+  }
+  
+  button.bg-red-500 {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  button.bg-red-500:hover {
+    background-color: #c82333;
+  }
