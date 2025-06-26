@@ -20,21 +20,99 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-amber-50 flex flex-col items-center text-center px-4 py-8">
-      {/* Logo e Introducción */}
-      <img src={logo} alt="Essen Logo" className="w-40 mb-6" />
-      <h1 className="text-4xl font-bold mb-2">Essen Restaurant</h1>
-      <p className="text-lg mb-6 max-w-xl">
-        Bienvenidos a Essen, cocina de autor con sabores tradicionales.
-        Descubrí una experiencia culinaria única donde la pasión por los ingredientes se encuentra con la creatividad.
-      </p>
 
-      {/* Botón para ver el menú */}
-      <button
-        className="bg-amber-500 hover:bg-amber-800 text-white px-6 py-3 rounded-lg transition mb-8"
-        onClick={() => navigate("/menu")}
-      >
-        Ver Menú
-      </button>
+            <div className="bg-gradient-to-b from-amber-600 to-amber-400 shadow-lg rounded-2xl w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center my-12 p-6 md:p-16 min-h-[350px] md:min-h-[500px]">
+        {/* Imagen a la izquierda */}
+        <div className="w-full md:w-1/2 flex justify-center mb-6 md:mb-0 md:mr-16">
+          <img
+            src={restaurant1}
+            alt="Restaurante 1"
+            className="rounded-xl shadow-xl w-full h-52 md:h-96 object-cover cursor-pointer max-w-xs md:max-w-xl"
+            onClick={() => openImage(restaurant1)}
+          />
+        </div>
+        {/* Info de reservas a la derecha */}
+        <div className="w-full md:w-1/2 flex flex-col items-center text-center">
+          <h2 className="text-2xl md:text-5xl font-extrabold mb-4 md:mb-8 text-white drop-shadow-lg">Essen</h2>
+          <p className="text-base md:text-2xl text-white mb-4 md:mb-8 font-semibold drop-shadow">
+                    Bienvenidos a Essen, cocina de autor con sabores tradicionales.
+        Descubrí una experiencia culinaria única donde la pasión por los ingredientes se encuentra con la creatividad.
+          </p>
+          <button
+            className="bg-white text-amber-700 font-bold px-6 py-3 md:px-10 md:py-5 rounded-2xl shadow-xl hover:bg-amber-800 hover:text-black transition text-base md:text-2xl border-4 border-amber-700 hover:border-black"
+            onClick={() => navigate("/menu")}
+          >
+            Ver Menu
+          </button>
+        </div>
+      </div>
+
+      <div className="bg-gradient-to-b from-amber-600 to-amber-400 shadow-lg rounded-2xl w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center my-12 p-6 md:p-16 min-h-[350px] md:min-h-[500px]">
+        {/* Info de ubicación a la izquierda */}
+        <div className="w-full md:w-1/2 flex flex-col items-center text-center mb-6 md:mb-0 md:mr-16">
+          <h2 className="text-2xl md:text-5xl font-extrabold mb-4 md:mb-8 text-white drop-shadow-lg">Ubicación</h2>
+          <p className="text-base md:text-2xl text-white mb-4 md:mb-8 font-semibold drop-shadow">
+            Para realizar una reserva, llámanos al:
+            <br />
+            <span className="font-bold"> +34 123 456 789</span>
+            <br />
+            o envíanos un correo a:
+            <span className="font-bold"> reservas@essen.com</span>
+          </p>
+          <button
+            className="bg-white text-amber-700 font-bold px-6 py-3 md:px-10 md:py-5 rounded-2xl shadow-xl hover:bg-amber-800 hover:text-black transition text-base md:text-2xl border-4 border-amber-700 hover:border-black mt-4 md:mt-8"
+            onClick={() =>
+              (window.location.href =
+                "https://www.google.com/maps/place/Pasaje+Pereyra+1730")
+            }
+          >
+            Ver en Google Maps
+          </button>
+        </div>
+        {/* Imagen a la derecha */}
+        <div className="w-full md:w-1/2 flex justify-center mt-4 md:mt-0 md:ml-16">
+          <img
+            src={restaurant2}
+            alt="Restaurante 3"
+            className="rounded-xl shadow-xl w-full h-52 md:h-96 object-cover cursor-pointer max-w-xs md:max-w-xl"
+            onClick={() => openImage(restaurant2)}
+          />
+        </div>
+      </div>
+
+      <div className="bg-gradient-to-b from-amber-600 to-amber-400 shadow-lg rounded-2xl w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center my-12 p-6 md:p-16 min-h-[350px] md:min-h-[500px]">
+        {/* Imagen a la izquierda */}
+        <div className="w-full md:w-1/2 flex justify-center mb-6 md:mb-0 md:mr-16">
+          <img
+            src={restaurant3}
+            alt="Restaurante 3"
+            className="rounded-xl shadow-xl w-full h-52 md:h-96 object-cover cursor-pointer max-w-xs md:max-w-xl"
+            onClick={() => openImage(restaurant3)}
+          />
+        </div>
+        {/* Info de reservas a la derecha */}
+        <div className="w-full md:w-1/2 flex flex-col items-center text-center">
+          <h2 className="text-2xl md:text-5xl font-extrabold mb-4 md:mb-8 text-white drop-shadow-lg">Reservas</h2>
+          <p className="text-base md:text-2xl text-white mb-4 md:mb-8 font-semibold drop-shadow">
+            Para realizar una reserva, llámanos al:
+            <br />
+            <span className="font-bold"> +34 123 456 789</span>
+            <br />
+            o envíanos un correo a:
+            <span className="font-bold"> reservas@essen.com</span>
+          </p>
+          <button
+            className="bg-white text-amber-700 font-bold px-6 py-3 md:px-10 md:py-5 rounded-2xl shadow-xl hover:bg-amber-800 hover:text-black transition text-base md:text-2xl border-4 border-amber-700 hover:border-black"
+            onClick={() =>
+              (window.location.href =
+                "https://api.whatsapp.com/send?phone=1158775695&text=Hola,%20me%20gustaría%20hacer%20una%20reserva.")
+            }
+          >
+            Hacer una Reserva
+          </button>
+        </div>
+      </div>
+
 
       {/* Galería de imágenes */}
       <div className="max-w-6xl w-full mt-12">
@@ -80,50 +158,7 @@ const About = () => {
         </div>
       )}
 
-      {/* Contenedor de Ubicación y Reservas */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl w-full mt-12">
-        {/* Ubicación */}
-        <div className="bg-white shadow-md rounded-lg p-8">
-          <h2 className="text-3xl font-bold mb-4">Ubicación</h2>
-          <br />
-          <p className="text-base text-gray-700 mb-4 font-bold">
-            Pasaje Pereyra 1730, CABA
-          </p>
-          
-          <br />
-          <button
-            className="bg-amber-500 hover:bg-amber-800 text-white px-6 py-3 rounded-lg transition text-lg"
-            onClick={() =>
-              (window.location.href =
-                "https://www.google.com/maps/place/Pasaje+Pereyra+1730")
-            }
-          >
-            Ver en Google Maps
-          </button>
-        </div>
 
-        {/* Cómo hacer una reserva */}
-        <div className="bg-white shadow-md rounded-lg p-8">
-          <h2 className="text-3xl font-bold mb-4">Reservas</h2>
-          <p className="text-base text-gray-700 mb-4">
-            Para realizar una reserva, llámanos al:
-            <br />
-            <span className="font-bold"> +34 123 456 789</span>
-            <br />
-            o envíanos un correo a:
-            <span className="font-bold"> reservas@essen.com</span>
-          </p>
-          <button
-            className="bg-amber-500 hover:bg-amber-800 text-white px-6 py-3 rounded-lg transition text-lg"
-            onClick={() =>
-              (window.location.href =
-                "https://api.whatsapp.com/send?phone=1158775695&text=Hola,%20me%20gustaría%20hacer%20una%20reserva.")
-            }
-          >
-            Hacer una Reserva
-          </button>
-        </div>
-      </div>
     </div>
   );
 };
