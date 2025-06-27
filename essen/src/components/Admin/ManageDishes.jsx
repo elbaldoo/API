@@ -15,14 +15,17 @@ const ManageDishes = () => {
   const [showAddSubcategory, setShowAddSubcategory] = useState(false);
   const [showAddDish, setShowAddDish] = useState(false);
 
-  // Fetch all data on mount
+  // Estado para edición de plato
+  const [editDishId, setEditDishId] = useState(null);
+  const [editDish, setEditDish] = useState({ nombre: "", precio: "", descripcion: "", image: "", categoria_id: "", subcategoria_id: "" });
+
   useEffect(() => {
     fetchCategories();
     fetchSubcategories();
     fetchDishes();
   }, []);
 
-  // Fetch functions
+
   const fetchCategories = async () => {
     try {
       const res = await fetch("http://localhost:3000/api/categorias");
@@ -89,9 +92,10 @@ const ManageDishes = () => {
   const handleAddDish = async () => {
     if (!newDish.nombre.trim() || !newDish.precio || !newDish.categoria_id || !newDish.subcategoria_id) return;
     try {
+      const token = localStorage.getItem("token");
       await fetch("http://localhost:3000/api/platos", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify(newDish),
       });
       setNewDish({ nombre: "", precio: "", descripcion: "", image: "", categoria_id: "", subcategoria_id: "" });
@@ -101,7 +105,49 @@ const ManageDishes = () => {
     }
   };
 
-  // Filter subcategories by selected category
+  // Editar plato
+  const handleEditClick = (dish) => {
+    setEditDishId(dish.id);
+    setEditDish({
+      nombre: dish.nombre,
+      precio: dish.precio,
+      descripcion: dish.descripcion,
+      image: dish.image,
+      categoria_id: dish.categoria_id || (dish.categoria && dish.categoria.id) || "",
+      subcategoria_id: dish.subcategoria_id || (dish.subcategoria && dish.subcategoria.id) || "",
+    });
+  };
+
+  const handleEditDishSave = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      await fetch(`http://localhost:3000/api/platos/${editDishId}`, {
+        method: "PUT",
+        headers: { 
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(editDish),
+      });
+      setEditDishId(null);
+      setEditDish({ nombre: "", precio: "", descripcion: "", image: "", categoria_id: "", subcategoria_id: "" });
+      fetchDishes();
+    } catch (e) {
+      console.error("Error updating dish", e);
+    }
+  };
+
+  const handleEditDishCancel = () => {
+    setEditDishId(null);
+    setEditDish({ nombre: "", precio: "", descripcion: "", image: "", categoria_id: "", subcategoria_id: "" });
+  };
+
+  // Filter subcategories by selected category (para edición)
+  const filteredEditSubcategories = editDish.categoria_id
+    ? subcategories.filter((s) => String(s.categoria_id) === String(editDish.categoria_id))
+    : [];
+
+  // Filter subcategories by selected category (para alta)
   const filteredSubcategories = newDish.categoria_id
     ? subcategories.filter((s) => String(s.categoria_id) === String(newDish.categoria_id))
     : [];
@@ -246,31 +292,123 @@ const ManageDishes = () => {
         </div>
       )}
 
+      {/* Pantalla de edición de plato */}
+      {editDishId && (
+        <div className="mb-4 bg-yellow-100 p-3 rounded">
+          <h4 className="font-semibold mb-1">Modificar Plato</h4>
+          <div className="flex gap-2 flex-wrap">
+            <input
+              type="text"
+              placeholder="Nombre del plato"
+              value={editDish.nombre}
+              onChange={(e) => setEditDish({ ...editDish, nombre: e.target.value })}
+              className="border border-gray-300 rounded px-2 py-1 text-sm"
+            />
+            <input
+              type="text"
+              placeholder="Precio"
+              value={editDish.precio}
+              onChange={(e) => setEditDish({ ...editDish, precio: e.target.value })}
+              className="border border-gray-300 rounded px-2 py-1 text-sm"
+            />
+            <input
+              type="text"
+              placeholder="Descripción"
+              value={editDish.descripcion}
+              onChange={(e) => setEditDish({ ...editDish, descripcion: e.target.value })}
+              className="border border-gray-300 rounded px-2 py-1 text-sm"
+            />
+            {/* Campo imagen solo en edición */}
+            <input
+              type="text"
+              placeholder="Imagen (filename)"
+              value={editDish.image}
+              onChange={(e) => setEditDish({ ...editDish, image: e.target.value })}
+              className="border border-gray-300 rounded px-2 py-1 text-sm"
+            />
+            <select
+              value={editDish.categoria_id}
+              onChange={(e) => setEditDish({ ...editDish, categoria_id: e.target.value, subcategoria_id: "" })}
+              className="border border-gray-300 rounded px-2 py-1 text-sm"
+            >
+              <option value="">Categoría</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>{cat.nombre}</option>
+              ))}
+            </select>
+            <select
+              value={editDish.subcategoria_id}
+              onChange={(e) => setEditDish({ ...editDish, subcategoria_id: e.target.value })}
+              className="border border-gray-300 rounded px-2 py-1 text-sm"
+              disabled={!editDish.categoria_id}
+            >
+              <option value="">Subcategoría</option>
+              {filteredEditSubcategories.map((sub) => (
+                <option key={sub.id} value={sub.id}>{sub.nombre}</option>
+              ))}
+            </select>
+            {/* Campo disponible en edición */}
+            <select
+              value={editDish.disponible ?? ""}
+              onChange={(e) => setEditDish({ ...editDish, disponible: e.target.value })}
+              className="border border-gray-300 rounded px-2 py-1 text-sm"
+            >
+              <option value="">Disponible?</option>
+              <option value="true">Sí</option>
+              <option value="false">No</option>
+            </select>
+            <button
+              onClick={handleEditDishSave}
+              className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm"
+            >
+              Guardar
+            </button>
+            <button
+              onClick={handleEditDishCancel}
+              className="bg-gray-400 hover:bg-gray-500 text-white px-3 py-1 rounded text-sm"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Listar Platos */}
-      
+      <h4 className="font-semibold mb-2 mt-6">Lista de Platos</h4>
       <table className="table-auto border-collapse border border-gray-300 w-full text-sm">
         <thead>
           <tr>
             <th className="border border-gray-300 px-2 py-1">Nombre</th>
             <th className="border border-gray-300 px-2 py-1">Precio</th>
             <th className="border border-gray-300 px-2 py-1">Descripción</th>
-            <th className="border border-gray-300 px-2 py-1">Imagen</th>
             <th className="border border-gray-300 px-2 py-1">Categoría</th>
             <th className="border border-gray-300 px-2 py-1">Subcategoría</th>
+            <th className="border border-gray-300 px-2 py-1">Disponible</th>
+            <th className="border border-gray-300 px-2 py-1">Acciones</th>
           </tr>
         </thead>
         <tbody>
           {dishes.map((dish) => {
-            const categoria = categories.find((c) => String(c.id) === String(dish.categoria_id));
-            const subcategoria = subcategories.find((s) => String(s.id) === String(dish.subcategoria_id));
+            const categoria = categories.find((c) => String(c.id) === String(dish.categoria.id));
+            const subcategoria = subcategories.find((s) => String(s.id) === String(dish.subcategoria.id));
             return (
               <tr key={dish.id}>
                 <td className="border border-gray-300 px-2 py-1">{dish.nombre}</td>
                 <td className="border border-gray-300 px-2 py-1">{dish.precio} €</td>
                 <td className="border border-gray-300 px-2 py-1">{dish.descripcion}</td>
-                <td className="border border-gray-300 px-2 py-1">{dish.image}</td>
                 <td className="border border-gray-300 px-2 py-1">{categoria ? categoria.nombre : ""}</td>
                 <td className="border border-gray-300 px-2 py-1">{subcategoria ? subcategoria.nombre : ""}</td>
+                <td className="border border-gray-300 px-2 py-1">
+                  {dish.disponible === true || dish.disponible === "true" ? "Sí" : "No"}
+                </td>
+                <td className="border border-gray-300 px-2 py-1">
+                  <button
+                    className="bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded text-xs"
+                    onClick={() => handleEditClick(dish)}
+                  >
+                    Modificar
+                  </button>
+                </td>
               </tr>
             );
           })}
