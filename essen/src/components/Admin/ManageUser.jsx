@@ -87,8 +87,19 @@ const ManageUsers = () => {
 
   const handleSaveUser = async (userId) => {
     try {
+      if (!userId) {
+        console.error("Invalid userId:", userId);
+        return;
+      }
+
       const token = localStorage.getItem("token");
       const updatedUser = users.find((user) => user.id === userId);
+
+      if (!updatedUser) {
+        console.error("User not found for userId:", userId);
+        return;
+      }
+
       const response = await fetch(`http://localhost:3000/api/usuarios/${userId}`, {
         method: "PUT",
         headers: {

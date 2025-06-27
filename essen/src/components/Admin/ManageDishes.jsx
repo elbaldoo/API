@@ -389,8 +389,9 @@ const ManageDishes = () => {
         </thead>
         <tbody>
           {dishes.map((dish) => {
-            const categoria = categories.find((c) => String(c.id) === String(dish.categoria.id));
-            const subcategoria = subcategories.find((s) => String(s.id) === String(dish.subcategoria.id));
+            const categoria = dish.categoria ? categories.find((c) => String(c.id) === String(dish.categoria.id)) : null;
+            const subcategoria = dish.subcategoria ? subcategories.find((s) => String(s.id) === String(dish.subcategoria.id)) : null;
+
             return (
               <tr key={dish.id}>
                 <td className="border border-gray-300 px-2 py-1">{dish.nombre}</td>
