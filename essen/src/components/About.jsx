@@ -18,9 +18,14 @@ const About = () => {
   };
 
   return (
-    <div className="min-h-screen bg-amber-50 flex flex-col items-center text-center px-4 py-8">
-
-        <div className="bg-gradient-to-b from-amber-600 to-amber-500 shadow-lg rounded-2xl w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center my-12 p-6 md:p-16 min-h-[350px] md:min-h-[500px]">
+    <div
+      className="relative min-h-screen bg-amber-50 flex flex-col items-center text-center px-4 py-8"
+      style={{
+        backgroundImage: "radial-gradient(rgba(245,158,11,0.15) 4px, transparent 4px)",
+        backgroundSize: "30px 30px",
+      }}
+    >
+      <div className="bg-gradient-to-b from-amber-600 to-amber-500 shadow-lg rounded-2xl w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center my-12 p-6 md:p-16 min-h-[350px] md:min-h-[500px]">
         {/* Imagen a la izquierda */}
         <div className="w-full md:w-1/2 flex justify-center mb-6 md:mb-0 md:mr-16">
           <img
@@ -113,9 +118,11 @@ const About = () => {
       </div>
 
 
-      {/* Galería de imágenes */}
-      <div className="max-w-6xl w-full mt-12">
-        <h2 className="text-4xl font-serif font-bold mb-4">Galería</h2>
+      
+      <div className="bg-gradient-to-b from-amber-600 to-amber-500 shadow-lg rounded-2xl w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center my-12 p-6 md:p-16 min-h-[350px] md:min-h-[500px]">
+        {/* Galería de imágenes */}
+      <div className="max-w-6xl w-full mt-2">
+        <h2 className="text-3xl md:text-6xl font-serif font-extrabold mb-8 pb-4 md:mb-8 text-white drop-shadow-lg">Galería</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <img
             src={restaurant1}
@@ -156,8 +163,8 @@ const About = () => {
           </div>
         </div>
       )}
-
-
+      </div>
+      
     </div>
   );
 };
